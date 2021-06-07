@@ -3,7 +3,7 @@
         <div class="container" v-for="post in posts" :key="post.id">
             <div class="post_box">
                 <h3 @click="openPost(post.id, post.username)">{{post.title}}</h3>
-                <p class="username">User: {{post.username}}</p>
+                <p class="username" @click="allUserPosts(post.username)">User: {{post.username}}</p>
                 <p class="description" @click="openPost(post.id, post.username)">{{post.description.substr(0,70)}}...</p>
                 <img :src="post.image" alt="">
             </div>
@@ -25,20 +25,22 @@ export default {
         .then(data => {
             console.log(data.data);
             this.posts = data.data;
-            this.$$emit('hid-menu', true)
         })
     },
     methods: {
         openPost(id, user) {
-            this.$router.push(`/${user}/${id}`)
-        }
+            this.$router.push(`/post/${user}/${id}`)
+        },
+        allUserPosts(user) {
+          this.$router.push(`/posts/${user}`)
+      }
     }
 }
 </script>
 <style scoped>
     /* Mobile first */
     .container {
-        margin: 15px 20px;
+        margin: 35px 20px;
     }
     .post_box {
         display: flex;
@@ -66,11 +68,12 @@ export default {
         font-size: 1.2em;
         color: var(--primary-color);
         font-weight: 600;
+        padding-top: 10px;
     }
     .post_box .description {
         font-size: 1.2em;
         color: var(--primary-color);
-        padding: 10px 0;
+        padding: 20px 0;
         word-wrap: break-word;
         width: 100%;
     }

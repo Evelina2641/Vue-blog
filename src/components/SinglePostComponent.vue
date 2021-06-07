@@ -29,7 +29,7 @@ export default {
   },
   methods: {
       allUserPosts(user) {
-          this.$router.push(`/${user}`)
+          this.$router.push(`/posts/${user}`)
       }
   }
 };

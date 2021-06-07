@@ -7,10 +7,10 @@
           <font-awesome-icon icon="bars" />
         </div>
       </div>
-      <div class="nav_items" :class="{ hidden: showMenu } " @hide-menu="showMenu">
+      <div class="nav_items" :class="{ hidden: hideMenu } ">
         <router-link to="/">Home</router-link>
         <router-link to="/login">Login</router-link>
-        <router-link to="/login">Registration</router-link>
+        <router-link to="/registration" @click="random">Registration</router-link>
       </div>
     </header>
     <router-view />
@@ -26,15 +26,23 @@ export default {
   name: "App",
   data() {
     return {
-      showMenu: true,
+      hideMenu: true,
     };
   },
   methods: {
     displayMenu() {
-      this.showMenu = !this.showMenu;
+      this.hideMenu = !this.hideMenu;
     },
     homePage() {
       this.$router.push(`/`)
+    },
+    random() {
+      this.$router.push(`/registration`)
+    }
+  },
+  watch: {
+    $route() {
+      this.hideMenu = true;
     }
   }
 };
@@ -53,12 +61,13 @@ export default {
 }
 #nav {
   background: var(--secondary-color);
+  padding: 10px 15px;
 }
 .wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 15px;
+  
 }
 .wrapper .logo {
   color: var(--primary-color);
@@ -73,11 +82,14 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: right;
-  font-size: 1.2em;
-  
+  font-size: 1.4em;
+  margin-top: 5px;
 }
 .nav_items > a {
     text-decoration: none;
+     padding-bottom: 5px;
+     color: var(--primary-color);
+     text-align: center;
 }
 .hidden {
   display: none;
