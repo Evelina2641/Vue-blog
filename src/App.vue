@@ -1,32 +1,88 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" >
+    <header id="nav">
+      <div class="wrapper">
+        <div class="logo" @click="homePage">EVA'S BLOG</div>
+        <div class="mobile_burger" @click="displayMenu">
+          <font-awesome-icon icon="bars" />
+        </div>
+      </div>
+      <div class="nav_items" :class="{ hidden: showMenu } " @hide-menu="showMenu">
+        <router-link to="/">Home</router-link>
+        <router-link to="/login">Login</router-link>
+        <router-link to="/login">Registration</router-link>
+      </div>
+    </header>
+    <router-view />
+    <footer>
+      All rights reserved
+    </footer>
+
   </div>
+  
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      showMenu: true,
+    };
+  },
+  methods: {
+    displayMenu() {
+      this.showMenu = !this.showMenu;
+    },
+    homePage() {
+      this.$router.push(`/`)
+    }
+  }
+};
+</script>
+<style >
+/* Mobile first */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
 }
-
+:root {
+  --primary-color: #00539CFF;
+  --secondary-color: #EEA47FFF;
+}
 #nav {
-  padding: 30px;
+  background: var(--secondary-color);
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.wrapper .logo {
+  color: var(--primary-color);
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.mobile_burger {
+  font-size: 1.7em;
+  color: var(--primary-color);
+}
+.nav_items {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  font-size: 1.2em;
+  
+}
+.nav_items > a {
+    text-decoration: none;
+}
+.hidden {
+  display: none;
+}
+footer {
+  height: 10%;
 }
 </style>
