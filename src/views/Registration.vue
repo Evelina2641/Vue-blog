@@ -1,12 +1,12 @@
 <template>
-    <RegistrationComponent/>
+  <RegistrationComponent />
 </template>
 <script>
-import RegistrationComponent from '../components/RegistrationComponent'
+import RegistrationComponent from "../components/RegistrationComponent";
 export default {
-    name: 'Login',
-    components: {
-        RegistrationComponent
-    }
-}
+  name: "Login",
+  components: {
+    RegistrationComponent,
+  },
+};
 </script>

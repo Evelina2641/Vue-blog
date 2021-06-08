@@ -1,12 +1,12 @@
 <template>
-    <MainPageComponent/>
+  <MainPageComponent />
 </template>
 <script>
-import MainPageComponent from '../components/MainPageComponent.vue'
+import MainPageComponent from "../components/MainPageComponent.vue";
 export default {
-    name: 'MainPage',
-    components: {
-        MainPageComponent
-    }
-}
+  name: "MainPage",
+  components: {
+    MainPageComponent,
+  },
+};
 </script>

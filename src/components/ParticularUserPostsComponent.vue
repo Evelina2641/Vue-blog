@@ -1,16 +1,17 @@
 <template>
   <div>
+    <!-- To show how many posts user has -->
+    <p class="hasPosts">
+      User {{ this.$route.params.user }} has {{ userPosts.length }}
+      <span v-if="userPosts.length > 1">posts</span>
+      <span v-if="userPosts.length <= 1">post</span>
+    </p>
     <div
       class="container"
       v-for="post in userPosts"
       :key="post.id"
       :class="{ moreMargin: userPosts.length <= 1 }"
     >
-      <p class="hasPosts">
-        User {{ post.username }} has {{userPosts.length}}
-        <span v-if="userPosts.length > 1">posts</span>
-        <span v-if="userPosts.length <= 1">post</span>
-      </p>
       <div class="post_box">
         <h3 @click="openPost(post.id, post.username)">{{ post.title }}</h3>
         <p class="username">User: {{ post.username }}</p>
@@ -36,7 +37,6 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         this.userPosts = data.data;
-        console.log(data.data);
       });
   },
   methods: {
@@ -48,17 +48,19 @@ export default {
 </script>
 <style scoped>
 /* Mobile first */
+.hasPosts {
+  font-weight: 600;
+  color: var(--secondary-color);
+  background: var(--primary-color);
+  width: 40%;
+  padding: 5px;
+  margin: 25px;
+}
+
 .container {
   margin: 35px 20px;
 }
-.container .hasPosts {
-    font-weight: 600;
-    color: var(--secondary-color);
-    background: var(--primary-color);
-    width: 40%;
-    padding: 5px;
-    margin-bottom: 25px;
-}
+
 .moreMargin {
   margin-bottom: 390px;
 }

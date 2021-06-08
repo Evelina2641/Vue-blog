@@ -1,12 +1,12 @@
 <template>
-    <ParticularUserPostsComponent/>
+  <ParticularUserPostsComponent />
 </template>
 <script>
-import ParticularUserPostsComponent from '../components/ParticularUserPostsComponent'
+import ParticularUserPostsComponent from "../components/ParticularUserPostsComponent";
 export default {
-    name: 'ParticularUserPosts',
-    components: {
-        ParticularUserPostsComponent
-    }
-}
+  name: "ParticularUserPosts",
+  components: {
+    ParticularUserPostsComponent,
+  },
+};
 </script>

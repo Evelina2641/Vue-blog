@@ -1,5 +1,5 @@
 <template>
-  <div id="app" >
+  <div id="app">
     <header id="nav">
       <div class="wrapper">
         <div class="logo" @click="homePage">EVA'S BLOG</div>
@@ -7,19 +7,26 @@
           <font-awesome-icon icon="bars" />
         </div>
       </div>
-      <div class="nav_items" :class="{ hidden: hideMenu } ">
+      <div class="nav_items" :class="{ hidden: hideMenu }">
         <router-link to="/">Home</router-link>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/registration" @click="random">Registration</router-link>
+        <router-link to="/login" v-if="username === null">Login</router-link>
+        <router-link to="/registration" v-if="username === null"
+          >Registration</router-link
+        >
+        <!-- Navigation if you logged in -->
+        <router-link to="" v-if="username !== null">
+          <a @click="showProfile">Profile</a>
+        </router-link>
+        <router-link to="" v-if="username !== null">
+          <a @click="logout">Logout</a>
+        </router-link>
       </div>
     </header>
     <router-view />
     <footer>
-      All rights reserved
+      <p>&copy; All rights reserved</p>
     </footer>
-
   </div>
-  
 </template>
 <script>
 export default {
@@ -27,6 +34,7 @@ export default {
   data() {
     return {
       hideMenu: true,
+      username: localStorage.getItem("username"),
     };
   },
   methods: {
@@ -34,20 +42,27 @@ export default {
       this.hideMenu = !this.hideMenu;
     },
     homePage() {
-      this.$router.push(`/`)
+      this.$router.push(`/`);
     },
-    random() {
-      this.$router.push(`/registration`)
-    }
+    showProfile() {
+      this.$router.push(`/user/${this.username}`);
+    },
+    logout() {
+      localStorage.removeItem("username");
+      localStorage.removeItem("secretKey");
+      this.$router.push("/");
+      // Cia irgi nesugalvojau kaip padaryti kad ir navigacija pasikeistu pereinat i main puslapi po logout'o..
+      window.location.reload();
+    },
   },
   watch: {
     $route() {
       this.hideMenu = true;
-    }
-  }
+    },
+  },
 };
 </script>
-<style >
+<style>
 /* Mobile first */
 * {
   margin: 0;
@@ -56,8 +71,8 @@ export default {
   font-family: monospace;
 }
 :root {
-  --primary-color: #00539CFF;
-  --secondary-color: #EEA47FFF;
+  --primary-color: #00539cff;
+  --secondary-color: #eea47fff;
 }
 #nav {
   background: var(--secondary-color);
@@ -67,7 +82,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
 }
 .wrapper .logo {
   color: var(--primary-color);
@@ -86,15 +100,19 @@ export default {
   margin-top: 5px;
 }
 .nav_items > a {
-    text-decoration: none;
-     padding-bottom: 5px;
-     color: var(--primary-color);
-     text-align: center;
+  text-decoration: none;
+  padding-bottom: 5px;
+  color: var(--primary-color);
+  text-align: center;
+  cursor: pointer;
 }
 .hidden {
   display: none;
 }
 footer {
-  height: 10%;
+  text-align: center;
+  font-size: 1em;
+  margin-bottom: 10px;
+  opacity: 0.7;
 }
 </style>
