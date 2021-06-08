@@ -2,8 +2,8 @@
   <div class="main_page">
     <h1>EXPLORE OUR BLOG POSTS!</h1>
     <button @click="sortPost">SORT NEWEST</button>
-    <div class="container" v-for="post in posts" :key="post.id">
-      <div class="post_box">
+    <div class="container">
+      <div class="post_box" v-for="post in posts" :key="post.id">
         <h3 @click="openPost(post.id, post.username)">{{ post.title }}</h3>
         <p class="username" @click="allUserPosts(post.username)">
           {{ new Date(post.timestamp).getFullYear() }}.{{
@@ -12,7 +12,7 @@
           by user {{ post.username }}
         </p>
         <p class="description" @click="openPost(post.id, post.username)">
-          {{ post.description.substr(0, 70) }}...
+          {{ post.description.substr(0, 100) }}...
         </p>
         <img :src="post.image" alt="" />
       </div>
@@ -110,5 +110,62 @@ export default {
   width: 350px;
   height: 250px;
   margin-bottom: 20px;
+}
+
+/* Tablet */
+
+@media screen and (min-width: 678px) {
+  .main_page h1 {
+    font-size: 2.1em;
+  }
+  .main_page button {
+    padding: 12px 22px;
+    margin: 10px 0 0 10px;
+    font-size: 1.3em;
+  }
+  .container {
+    margin: 35px 30px;
+  }
+  .post_box h3 {
+    padding: 6px;
+  }
+  .post_box .username {
+    font-size: 1.3em;
+  }
+  .post_box .description {
+    font-size: 1.4em;
+  }
+  .post_box img {
+    width: 420px;
+    height: 280px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Desktop  */
+@media screen and (min-width: 1280px) {
+  .main_page {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .main_page h1 {
+    font-size: 2.4em;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .post_box {
+    width: 48%;
+    margin: 0 10px 35px 10px;
+  }
+  .post_box h3 {
+    min-height: 100px;
+  }
+  .post_box .description {
+    height: 100px;
+  }
 }
 </style>

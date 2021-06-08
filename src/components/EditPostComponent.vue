@@ -1,13 +1,17 @@
 <template>
   <div class="container">
     <Modal v-if="showModal">
-      <h3 slot="header">Confirm your edit?</h3>
+      <h3 slot="header">Confirm edit?</h3>
       <button slot="buttons" @click="editPost">YES</button>
       <button slot="buttons" @click="(showModal = false), (disabled = false)">
         NO
       </button>
     </Modal>
     <h2>EDIT POST</h2>
+    <p class="error_message" v-if="errorMessage !== ''">{{ errorMessage }}</p>
+    <p class="success_message" v-if="successMessage !== ''">
+      {{ successMessage }}
+    </p>
     <form @submit.prevent="confirmEdit">
       <label for="title">Title</label>
       <textarea
@@ -27,10 +31,6 @@
       <input type="text" :disabled="disabled" id="url" v-model="postData.url" />
       <button type="submit">Submit</button>
     </form>
-    <p class="error_message" v-if="errorMessage !== ''">{{ errorMessage }}</p>
-    <p class="success_message" v-if="successMessage !== ''">
-      {{ successMessage }}
-    </p>
   </div>
 </template>
 
@@ -78,17 +78,20 @@ export default {
         .then((res) => res.json())
         .then((json) => {
           if (json.success === false) {
-            return (this.errorMessage = json.message);
+            this.successMessage = "";
+            this.errorMessage = json.message;
           } else {
             this.errorMessage = "";
             this.successMessage = "Post updated successfully! ♥ ";
           }
         });
-        this.disabled = false;
+      this.disabled = false;
     },
   },
   mounted() {
-    fetch(`http://167.99.138.67:1111/getsinglepost/${this.$route.params.user}/${this.$route.params.id}`)
+    fetch(
+      `http://167.99.138.67:1111/getsinglepost/${this.$route.params.user}/${this.$route.params.id}`
+    )
       .then((res) => res.json())
       .then((json) => {
         this.postData.title = json.data.title;
@@ -103,13 +106,12 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  height: 90vh;
 }
 .container h2 {
   text-align: center;
   font-size: 2em;
   color: var(--primary-color);
-  margin: 25px 0;
+  margin: 15px 0;
 }
 .container form {
   display: flex;
@@ -121,17 +123,20 @@ export default {
   width: 90%;
   padding: 5px;
   margin-bottom: 25px;
+  margin-top: 10px;
 }
 #description {
   height: 280px;
   width: 90%;
   padding: 5px;
   margin-bottom: 25px;
+  margin-top: 10px;
 }
 #url {
   width: 90%;
   height: 30px;
   margin-bottom: 25px;
+  margin-top: 10px;
 }
 .container form label,
 textarea,
@@ -157,18 +162,37 @@ button {
 }
 .container .error_message {
   color: red;
-  padding-top: 35px;
   font-size: 1.3em;
   text-align: center;
 }
 .container .success_message {
   color: var(--secondary-color);
-  padding-top: 35px;
   font-size: 1.7em;
   text-align: center;
   font-weight: 600;
 }
 .container .error_message::first-letter {
   text-transform: capitalize;
+}
+/* Tablet */
+@media screen and (min-width: 678px) {
+  .container button {
+    width: 30%;
+    padding: 8px;
+  }
+  .container .error_message {
+    color: red;
+    font-size: 1.3em;
+    text-align: center;
+  }
+  .container .success_message {
+    color: var(--secondary-color);
+    font-size: 1.7em;
+    text-align: center;
+    font-weight: 600;
+  }
+  .container .error_message::first-letter {
+    text-transform: capitalize;
+  }
 }
 </style>

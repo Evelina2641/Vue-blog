@@ -3,7 +3,11 @@
     <header id="nav">
       <div class="wrapper">
         <div class="logo" @click="homePage">EVA'S BLOG</div>
-        <div class="mobile_burger" @click="displayMenu">
+        <div
+          class="mobile_burger"
+          @click="displayMenu"
+          :class="{ hideBar: true }"
+        >
           <font-awesome-icon icon="bars" />
         </div>
       </div>
@@ -114,5 +118,42 @@ footer {
   font-size: 1em;
   margin-bottom: 10px;
   opacity: 0.7;
+}
+/* Tablet */
+@media screen and (min-width: 1280px) {
+  .hideBar {
+    display: none;
+  }
+  #nav {
+    background: var(--secondary-color);
+    padding: 10px 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wrapper .logo {
+    font-size: 1.7em;
+  }
+  .nav_items {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    font-size: 1.5em;
+    margin-top: 0;
+  }
+  .nav_items > a {
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 5px;
+  }
+  .hidden {
+    display: block;
+  }
+  footer {
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
 }
 </style>

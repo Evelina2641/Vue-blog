@@ -11,8 +11,8 @@
     <div class="emty_container" v-if="userPosts.length === 0">
       <h2>You have 0 posts</h2>
     </div>
-    <div class="container" v-for="(post, index) in userPosts" :key="post.id">
-      <div class="post_box">
+    <div class="container">
+      <div class="post_box" v-for="(post, index) in userPosts" :key="post.id">
         <h3 @click="openPost(post.id, post.username)" class="title">
           {{ post.title }}
         </h3>
@@ -28,7 +28,7 @@
           <button @click="savePostIndex(index)">DELETE POST</button>
         </div>
         <p class="description" @click="openPost(post.id, post.username)">
-          {{ post.description.substr(0, 70) }}...
+          {{ post.description.substr(0, 100) }}...
         </p>
         <img :src="post.image" alt="" />
       </div>
@@ -98,6 +98,7 @@ export default {
 </script>
 
 <style scoped>
+/* Mobile first */
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -140,7 +141,6 @@ export default {
   align-items: center;
   border-bottom: 1px solid var(--primary-color);
   margin-bottom: 30px;
-  overflow: hidden;
 }
 .post_box .title,
 .post_box .username,
@@ -158,7 +158,6 @@ export default {
 }
 .post_box .username {
   display: block;
-  /* margin-right: auto; */
   font-size: 1.2em;
   color: var(--primary-color);
   font-weight: 600;
@@ -180,5 +179,61 @@ export default {
   width: 350px;
   height: 250px;
   margin-bottom: 20px;
+}
+/* Tablet */
+@media screen and (min-width: 678px) {
+  .wrapper {
+    margin: 0 30px;
+  }
+  .wrapper button {
+    font-size: 1.4em;
+  }
+  .empty_container {
+    font-size: 2.5em;
+  }
+  .post_box .title {
+    font-size: 1.9em;
+    padding: 8px;
+  }
+  .post_box .username {
+    font-size: 1.3em;
+  }
+  .post_box .description {
+    font-size: 1.4em;
+    width: 80%;
+  }
+  .post_box img {
+    width: 450px;
+    height: 280px;
+  }
+}
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    margin: 0 auto;
+    max-width: 1300px;
+  }
+  .wrapper h2 {
+    font-size: 2.3em;
+  }
+  .wrapper button {
+    font-size: 1.5em;
+  }
+  .empty_container {
+    font-size: 2.7em;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .post_box {
+    width: 48%;
+  }
+  .post_box .title {
+    min-height: 100px;
+  }
+  .post_box .description {
+    height: 100px;
+  }
 }
 </style>

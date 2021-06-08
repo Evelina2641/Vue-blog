@@ -104,4 +104,34 @@ button {
   padding-top: 35px;
   font-size: 1.3em;
 }
+/* Tablet */
+@media screen and (min-width: 678px) {
+  .container h3 {
+    font-size: 3.1em;
+    padding-bottom: 28px;
+  }
+  .container form label,
+  input,
+  button {
+    font-size: 1.7em;
+  }
+  .container form input {
+    margin-bottom: 18px;
+    padding: 4px 18px;
+  }
+  .container button {
+    padding: 6px;
+  }
+  .container .error_message {
+    font-size: 1.5em;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+}
 </style>

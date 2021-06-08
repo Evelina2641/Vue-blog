@@ -1,6 +1,10 @@
 <template>
   <div class="container">
     <h2>ADD POST</h2>
+    <p class="error_message" v-if="errorMessage !== ''">{{ errorMessage }}</p>
+    <p class="success_message" v-if="successMessage !== ''">
+      {{ successMessage }}
+    </p>
     <form @submit.prevent="addPost">
       <label for="title">Title</label>
       <textarea type="text" v-model="postData.title" id="title"></textarea>
@@ -14,10 +18,6 @@
       <input type="text" id="url" v-model="postData.url" />
       <button type="submit">Submit</button>
     </form>
-    <p class="error_message" v-if="errorMessage !== ''">{{ errorMessage }}</p>
-    <p class="success_message" v-if="successMessage !== ''">
-      {{ successMessage }}
-    </p>
   </div>
 </template>
 
@@ -58,7 +58,8 @@ export default {
         })
         .then((json) => {
           if (json.success === false) {
-            return (this.errorMessage = json.message);
+            this.successMessage = ''
+            this.errorMessage = json.message
           } else {
             this.errorMessage = "";
             this.successMessage = "Post added! ♥ ";
@@ -82,7 +83,7 @@ export default {
   text-align: center;
   font-size: 2em;
   color: var(--primary-color);
-  margin: 25px 0;
+  margin: 25px 0 15px 0;
 }
 .container form {
   display: flex;
@@ -122,7 +123,7 @@ button {
 }
 .container button {
   width: 40%;
-  margin-top: 10px;
+  margin-top: 5px;
   border: none;
   background: var(--secondary-color);
   padding: 5px;
@@ -130,16 +131,16 @@ button {
 }
 .container .error_message {
   color: red;
-  padding-top: 35px;
   font-size: 1.3em;
   text-align: center;
+  padding-bottom: 7px;
 }
 .container .success_message {
   color: var(--secondary-color);
-  padding-top: 35px;
   font-size: 1.7em;
   text-align: center;
   font-weight: 600;
+  padding-bottom: 7px;
 }
 .container .error_message::first-letter {
   text-transform: capitalize;

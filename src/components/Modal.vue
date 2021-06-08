@@ -52,4 +52,16 @@ export default {
   font-weight: 600;
   font-size: 1.2em;
 }
+/* Tablet */
+@media screen and (min-width: 678px) {
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal .modal_item .buttons button {
+    padding: 15px 55px;
+    font-size: 1.3em;
+  }
+}
 </style>

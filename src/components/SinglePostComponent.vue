@@ -24,7 +24,9 @@ export default {
     };
   },
   mounted() {
-    fetch(`http://167.99.138.67:1111/getsinglepost/${this.$route.params.user}/${this.$route.params.id}`)
+    fetch(
+      `http://167.99.138.67:1111/getsinglepost/${this.$route.params.user}/${this.$route.params.id}`
+    )
       .then((res) => res.json())
       .then((data) => (this.post = data.data));
   },
@@ -81,5 +83,51 @@ export default {
   border-bottom: 1px solid var(--secondary-color);
   cursor: pointer;
   margin-bottom: 50px;
+}
+/* Tablet */
+@media screen and (min-width: 678px) {
+  .container {
+    margin: 30px;
+  }
+  .container h3 {
+    font-size: 1.8em;
+  }
+  .container .username {
+    font-size: 1.3em;
+  }
+  .container .description {
+    font-size: 1.4em;
+    color: var(--primary-color);
+    padding: 40px 5px;
+    word-wrap: break-word;
+    width: 100%;
+    text-align: center;
+  }
+  .container img {
+    height: 350px;
+  }
+}
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .container {
+    padding: 30px 90px;
+    margin: 0 auto;
+    max-width: 1300px;
+  }
+  .container h3 {
+    font-size: 2em;
+  }
+  .container .description {
+    font-size: 1.5em;
+    line-height: 27px;
+    padding: 40px 15px;
+  }
+  .container img {
+    height: 450px;
+    width: 85%;
+  }
+  .container > div {
+    font-size: 1.5em;
+  }
 }
 </style>

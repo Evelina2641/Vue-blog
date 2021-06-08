@@ -118,7 +118,39 @@ button {
   padding-top: 35px;
   font-size: 1.3em;
 }
-.errorBorder {
-  color: red;
+/* Tablet */
+@media screen and (min-width: 678px) {
+  .container h3 {
+    font-size: 3.2em;
+  }
+  .container form label,
+  input,
+  button {
+    font-size: 1.6em;
+  }
+  .container form input {
+    margin-bottom: 18px;
+  }
+  .container button {
+    padding: 8px;
+  }
+  .container .error_message {
+    font-size: 1.5em;
+  }
+}
+/* Desktop */
+@media screen and (min-width: 1280px) {
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .container h3 {
+    font-size: 3.5em;
+  }
+  .container form label,
+  input,
+  button {
+    font-size: 2em;
+  }
 }
 </style>
